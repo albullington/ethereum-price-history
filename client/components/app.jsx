@@ -4,11 +4,24 @@ import axios from 'axios';
 import Chart from './chart';
 
 class App extends Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
 
     this.state = {
-      prices: [],
+      data: {
+        labels: [],
+        datasets: [
+          {
+            label: 'Price',
+            backgroundColor: 'rgba(75,192,192,0.4)',
+            borderColor: 'rgba(75,192,192,1)',
+            borderCapStyle: 'butt',
+            pointRadius: 1,
+            pointHitRadius: 10,
+            data: []
+          }
+        ]
+      }
     }
   }
 
@@ -17,7 +30,14 @@ class App extends Component {
       .then((res) => {
         console.log(res.data, 'client side');
         this.setState({
-          prices: res.data,
+          data: {
+            labels: res.data.labels,
+            datasets: [
+              {
+                data: res.data.data,
+              }
+            ]
+          }
         })
       })
       .catch((err) => {
@@ -27,12 +47,12 @@ class App extends Component {
 
   render() {
     let {
-      prices
+      data
     } = this.state;
-    
+
     return (
       <div>
-        <Chart prices={prices} />
+        <Chart data={data} />
       </div>
     )
   }

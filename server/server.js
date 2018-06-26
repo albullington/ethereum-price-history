@@ -14,15 +14,22 @@ app.get('/data', (req, res) => {
   axios.get('https://min-api.cryptocompare.com/data/histohour?fsym=ETH&tsym=USD&limit=10')
   .then((response) => {
     const prices = response.data.Data;
-    const filteredData = prices.map((element) => {
+    const labels = prices.map((element) => {
       const time = element.time;
+      return time;
+    });
+    // console.log(labels, 'labels');
+    
+    const data = prices.map((element) => {
       const closingPrice = element.close;
-      return { 
-        x: time, 
-        y: closingPrice
-      };
-    })
-    res.send(filteredData);
+      return closingPrice;
+    });
+    // console.log(data, 'data');
+
+    res.send({
+      labels: labels, 
+      data: data
+    });
   })
   .catch((err) => {
     if (err) {

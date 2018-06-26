@@ -1,55 +1,32 @@
 import React, { Component } from 'react';
-
-import {
-  XYPlot,
-  XAxis,
-  YAxis,
-  VerticalGridLines,
-  HorizontalGridLines,
-  AreaSeries
-} from 'react-vis';
+import { Line } from 'react-chartjs-2';
 
 class Chart extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      prices: [],
-    }
-  }
-
-  componentDidMount() {
-    axios.get('/data')
-      .then((res) => {
-        console.log(res.data, 'client side');
-        this.setState({
-          prices: res.data,
-        })
-      })
-      .catch((err) => {
-        throw err;
-      })
-  }
-
   render() {
-    let {
-      prices
+    const {
+      data
     } = this.props;
-
+    
     return (
-      <XYPlot
-        width={300}
-        height={300}>
-        <VerticalGridLines />
-        <HorizontalGridLines />
-        <XAxis />
-        <YAxis />
-        <AreaSeries
-          className="price-history-chart"
-          curve="curveNatural"
-          data={prices}/>
-      </XYPlot>
-    );
+      <div id="price-chart">
+        <Line
+          data={data}
+          options={
+            {
+              title: {
+                display: true,
+                text: 'Ethereum (USD) Price',
+                fontSize: 32,
+              },
+              legend: {
+                display: false,
+                position: 'bottom',
+              },
+            }
+          }
+        />
+      </div>
+    )
   }
 }
 

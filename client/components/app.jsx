@@ -1,15 +1,24 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
+import Chart from './chart';
+
 class App extends Component {
   constructor(props) {
     super(props);
+
+    this.state = {
+      prices: [],
+    }
   }
 
   componentDidMount() {
     axios.get('/data')
       .then((res) => {
-        console.log(res.data);
+        console.log(res.data, 'client side');
+        this.setState({
+          prices: res.data,
+        })
       })
       .catch((err) => {
         throw err;
@@ -17,9 +26,13 @@ class App extends Component {
   }
 
   render() {
+    let {
+      prices
+    } = this.state;
+    
     return (
       <div>
-        <p>React is compiling correctly</p>
+        <Chart prices={prices} />
       </div>
     )
   }

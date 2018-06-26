@@ -2,6 +2,7 @@ const express = require('express');
 const path = require('path');
 const axios = require('axios');
 const bodyParser = require('body-parser');
+const moment = require('moment');
 
 const app = express();
 
@@ -16,7 +17,7 @@ app.get('/data', (req, res) => {
     const prices = response.data.Data;
     const labels = prices.map((element) => {
       const time = element.time;
-      return time;
+      return moment.unix(time).format('MMMM Do YYYY, h:mm a');
     });
     // console.log(labels, 'labels');
     

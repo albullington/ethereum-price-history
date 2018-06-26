@@ -16,7 +16,7 @@ class Chart extends Component {
               title: {
                 display: true,
                 text: 'Ethereum (USD) Price',
-                fontSize: 32,
+                fontSize: 22,
               },
               legend: {
                 display: false,

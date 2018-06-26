@@ -12,6 +12,7 @@
   "dependencies": {
     "axios": "^0.18.0",
     "babel-cli": "^6.26.0",
+    "body-parser": "^1.18.3",
     "express": "^4.16.3",
     "nodemon": "^1.17.5",
     "react": "^16.3.2",

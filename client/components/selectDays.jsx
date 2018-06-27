@@ -7,6 +7,9 @@ import 'react-day-picker/lib/style.css';
 
 import { formatDate, parseDate } from 'react-day-picker/moment';
 
+const today = new Date();
+const past = new Date(today.getFullYear() - 1, today.getMonth(), today.getDate());
+
 class SelectDays extends Component {
   constructor(props) {
     super(props);
@@ -54,7 +57,7 @@ class SelectDays extends Component {
           parseDate={parseDate}
           dayPickerProps={{
             selectedDays: [from, { from, to }],
-            disabledDays: { after: to },
+            disabledDays: { before: past },
             toMonth: to,
             modifiers,
             numberOfMonths: 2,
@@ -73,7 +76,7 @@ class SelectDays extends Component {
             parseDate={parseDate}
             dayPickerProps={{
               selectedDays: [from, { from, to }],
-              disabledDays: { before: from },
+              disabledDays: { after: today },
               modifiers,
               month: from,
               fromMonth: from,

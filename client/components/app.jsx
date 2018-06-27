@@ -36,10 +36,37 @@ class App extends Component {
         ]
       },
     }
+
+    this.handleMonthClick = this.handleMonthClick.bind(this);
+  }
+
+  handleMonthClick(e) {
+    e.preventDefault();
+    this.displayLastMonth();
+  }
+
+  displayLastMonth() {
+    axios.get('/month')
+    .then((res) => {
+      console.log(res.data, 'client side');
+      this.setState({
+        data: {
+          labels: res.data.labels,
+          datasets: [
+            {
+              data: res.data.data,
+            }
+          ]
+        }
+      })
+    })
+    .catch((err) => {
+      throw err;
+    })
   }
 
   componentDidMount() {
-    axios.get('/data')
+    axios.get('/day')
       .then((res) => {
         console.log(res.data, 'client side');
         this.setState({
@@ -65,7 +92,7 @@ class App extends Component {
 
     return (
       <div>
-        <Menu />
+        <Menu onMonthClick={this.handleMonthClick} />
         <Chart data={data} />
       </div>
     )

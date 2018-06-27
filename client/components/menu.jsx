@@ -1,9 +1,9 @@
 import React from 'react';
 
-const Menu = () => (
+const Menu = (props) => (
   <div>
     <button>Last day</button>
-    <button>Last month</button>
+    <button onClick={props.onMonthClick}>Last month</button>
     <button>Last year</button>
   </div>
 );

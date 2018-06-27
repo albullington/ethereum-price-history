@@ -3,6 +3,11 @@ const moment = require('moment');
 
 const baseURL = 'https://min-api.cryptocompare.com/data/'
 
+const createPriceList = (prices) => prices.map((element) => {
+  const closingPrice = element.close;
+  return closingPrice;
+});
+
 const getPriceLastDay = (req, res) => {
   axios.get(baseURL + 'histominute?fsym=ETH&tsym=USD&limit=1440')
   .then((response) => {
@@ -12,10 +17,7 @@ const getPriceLastDay = (req, res) => {
       return moment.unix(time).format('MMM Do, h:mm a');
     });
     
-    const data = prices.map((element) => {
-      const closingPrice = element.close;
-      return closingPrice;
-    });
+    const data = createPriceList(prices);
 
     res.send({
       labels: labels, 
@@ -38,10 +40,7 @@ const getPriceLastMonth = (req, res) => {
       return moment.unix(time).format('MMM D');
     });
     
-    const data = prices.map((element) => {
-      const closingPrice = element.close;
-      return closingPrice;
-    });
+    const data = createPriceList(prices);
 
     res.send({
       labels: labels, 
@@ -64,10 +63,7 @@ const getPriceLastYear = (req, res) => {
       return moment.unix(time).format('MMM YY');
     });
     
-    const data = prices.map((element) => {
-      const closingPrice = element.close;
-      return closingPrice;
-    });
+    const data = createPriceList(prices);
 
     res.send({
       labels: labels, 

@@ -4,7 +4,7 @@ const Menu = (props) => (
   <div>
     <button onClick={props.onDayClick}>Last day</button>
     <button onClick={props.onMonthClick}>Last month</button>
-    <button>Last year</button>
+    <button onClick={props.onYearClick}>Last year</button>
   </div>
 );
 

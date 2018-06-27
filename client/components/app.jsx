@@ -37,18 +37,43 @@ class App extends Component {
       },
     }
 
-    this.handleMonthClick = this.handleMonthClick.bind(this);
     this.handleDayClick = this.handleDayClick.bind(this);
+    this.handleMonthClick = this.handleMonthClick.bind(this);
+    this.handleYearClick = this.handleYearClick.bind(this);
+  }
+
+  handleDayClick(e) {
+    e.preventDefault();
+    this.displayLastDay();
   }
 
   handleMonthClick(e) {
     e.preventDefault();
     this.displayLastMonth();
   }
-
-  handleDayClick(e) {
+  
+  handleYearClick(e) {
     e.preventDefault();
-    this.displayLastDay();
+    this.displayLastYear();
+  }
+
+  displayLastDay() {
+    axios.get('/day')
+    .then((res) => {
+      this.setState({
+        data: {
+          labels: res.data.labels,
+          datasets: [
+            {
+              data: res.data.data,
+            }
+          ]
+        }
+      })
+    })
+    .catch((err) => {
+      throw err;
+    })
   }
 
   displayLastMonth() {
@@ -71,10 +96,9 @@ class App extends Component {
     })
   }
 
-  displayLastDay() {
-    axios.get('/day')
+  displayLastYear() {
+    axios.get('/year')
     .then((res) => {
-      console.log(res.data, 'client side');
       this.setState({
         data: {
           labels: res.data.labels,
@@ -104,7 +128,8 @@ class App extends Component {
       <div>
         <Menu 
           onDayClick={this.handleDayClick} 
-          onMonthClick={this.handleMonthClick} 
+          onMonthClick={this.handleMonthClick}
+          onYearClick={this.handleYearClick}
         />
         <Chart data={data} />
       </div>

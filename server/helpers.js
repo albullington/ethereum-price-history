@@ -7,7 +7,7 @@ const getPriceLastDay = (req, res) => {
     const prices = response.data.Data;
     const labels = prices.map((element) => {
       const time = element.time;
-      return moment.unix(time).format('MMMM Do YYYY, h:mm a');
+      return moment.unix(time).format('MMMM Do, h:mm a');
     });
     
     const data = prices.map((element) => {
@@ -33,7 +33,7 @@ const getPriceLastMonth = (req, res) => {
     const prices = response.data.Data;
     const labels = prices.map((element) => {
       const time = element.time;
-      return moment.unix(time).format('MMMM Do YYYY, h:mm a');
+      return moment.unix(time).format('MMMM Do');
     });
     
     const data = prices.map((element) => {
@@ -59,7 +59,7 @@ const getPriceLastYear = (req, res) => {
     const prices = response.data.Data;
     const labels = prices.map((element) => {
       const time = element.time;
-      return moment.unix(time).format('MMMM Do YYYY, h:mm a');
+      return moment.unix(time).format('MMMM Do YYYY');
     });
     
     const data = prices.map((element) => {

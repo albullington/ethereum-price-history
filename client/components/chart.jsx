@@ -19,7 +19,7 @@ class Chart extends Component {
                 fontSize: 22,
               },
               legend: {
-                display: false,
+                display: true,
                 position: 'bottom',
               },
             }

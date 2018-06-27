@@ -13,24 +13,6 @@ class App extends Component {
         labels: [],
         datasets: [
           {
-            label: 'Price',
-            fill: false,
-            lineTension: 0.1,
-            backgroundColor: 'rgba(75,192,192,0.4)',
-            borderColor: 'rgba(75,192,192,1)',
-            borderCapStyle: 'butt',
-            pointRadius: 1,
-            pointHitRadius: 10,
-            borderDash: [],
-            borderDashOffset: 0.0,
-            borderJoinStyle: 'miter',
-            pointBorderColor: 'rgba(75,192,192,1)',
-            pointBackgroundColor: '#fff',
-            pointBorderWidth: 1,
-            pointHoverRadius: 5,
-            pointHoverBackgroundColor: 'rgba(75,192,192,1)',
-            pointHoverBorderColor: 'rgba(220,220,220,1)',
-            pointHoverBorderWidth: 2,
             data: []
           }
         ]
@@ -123,6 +105,25 @@ class App extends Component {
     let {
       data
     } = this.state;
+
+    data.datasets[0].label = 'Closing Price';
+    data.datasets[0].fill = false;
+    data.datasets[0].lineTension = 0.1;
+    data.datasets[0].backgroundColor = 'rgba(75,192,192,0.4)';
+    data.datasets[0].borderColor = 'rgba(75,192,192,1)';
+    data.datasets[0].borderCapStyle = 'butt';
+    data.datasets[0].pointRadius = 1;
+    data.datasets[0].pointHitRadius = 10;
+    data.datasets[0].borderDash = [];
+    data.datasets[0].borderDashOffset = 0.0;
+    data.datasets[0].borderJoinStyle = 'miter';
+    data.datasets[0].pointBorderColor = 'rgba(75,192,192,1)';
+    data.datasets[0].pointBackgroundColor = '#fff';
+    data.datasets[0].pointBorderWidth = 1;
+    data.datasets[0].pointHoverRadius = 5;
+    data.datasets[0].pointHoverBackgroundColor = 'rgba(75,192,192,1)';
+    data.datasets[0].pointHoverBorderColor = 'rgba(220,220,220,1)';
+    data.datasets[0].pointHoverBorderWidth = 2;
 
     return (
       <div>

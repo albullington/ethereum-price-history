@@ -54,7 +54,7 @@ class App extends Component {
       })
     })
     .catch((err) => {
-      throw err;
+      if (err) throw err;
     })
   }
 
@@ -73,7 +73,7 @@ class App extends Component {
       })
     })
     .catch((err) => {
-      throw err;
+      if (err) throw err;
     })
   }
 
@@ -92,8 +92,28 @@ class App extends Component {
       })
     })
     .catch((err) => {
-      throw err;
+      if (err) throw err;
     })
+  }
+
+  displayCustomDateRange(from, to) {
+    axios.get(`http://localhost:5001/custom/${from}/${to}`)
+      .then((res) => {
+        console.log(res.data, 'data in client');
+        this.setState({
+          data: {
+            labels: res.data.labels,
+            datasets: [
+              {
+                data: res.data.data,
+              }
+            ],
+          }
+        })
+      })
+      .catch((err) => {
+        if (err) throw err;
+      })
   }
 
   componentDidMount() {
@@ -130,6 +150,8 @@ class App extends Component {
           onDayClick={this.handleDayClick} 
           onMonthClick={this.handleMonthClick}
           onYearClick={this.handleYearClick}
+          displayCustomDateRange={this.displayCustomDateRange}
+          checkBothDatesChanged={this.checkBothDatesChanged}
         />
         <Chart data={data} />
       </div>

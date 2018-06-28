@@ -14,7 +14,7 @@ const inputStyle = {
   marginRight: '240px',
 }
 
-const Menu = ({ onDayClick, onMonthClick, onYearClick }) => (
+const Menu = ({ onDayClick, onMonthClick, onYearClick, displayCustomDateRange }) => (
   <div>
     <span>
     <button style={buttonStyle} onClick={onDayClick}>Past 24 hours</button>
@@ -22,7 +22,7 @@ const Menu = ({ onDayClick, onMonthClick, onYearClick }) => (
     <button style={buttonStyle} onClick={onYearClick}>Past year</button>
     </span>
     <span style={inputStyle}>
-      <SelectDays />
+      <SelectDays displayCustomDateRange={displayCustomDateRange} />
     </span>
   </div>
 );

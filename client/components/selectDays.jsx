@@ -28,18 +28,11 @@ class SelectDays extends Component {
     }
   }
 
-  getCustomDateRange(from, to) {
+  changeDatesToUnix(from, to) {
     if (this.checkBothDatesChanged(from, to)) {
       const unixFrom = moment(from).unix();
       const unixTo = moment(to).unix();
-
-      axios.get(`http://localhost:5001/custom/${unixFrom}/${unixTo}`)
-        .then((res) => {
-          console.log(res.data);
-        })
-        .catch((err) => {
-          if (err) throw err;
-        })
+      this.props.displayCustomDateRange(unixFrom, unixTo);
     }
   }
 
@@ -71,14 +64,14 @@ class SelectDays extends Component {
     this.setState({ 
       from,
     });
-    this.getCustomDateRange(from, this.state.to);
+    this.changeDatesToUnix(from, this.state.to);
   }
 
   handleToChange(to) {
     this.setState({ 
       to
     }, this.showFromMonth);
-    this.getCustomDateRange(this.state.from, to);
+    this.changeDatesToUnix(this.state.from, to);
   }
 
   render() {
@@ -102,7 +95,10 @@ class SelectDays extends Component {
           parseDate={parseDate}
           dayPickerProps={{
             selectedDays: [from, { from, to }],
-            disabledDays: { before: past },
+            disabledDays: { 
+              before: past,
+              after: today,
+            },
             toMonth: to,
             modifiers,
             numberOfMonths: 2,

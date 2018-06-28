@@ -77,18 +77,33 @@ const getPriceLastYear = (req, res) => {
   }); 
 }
 
+const calculateDateRange = (from, to) => {
+  const numOfSecs = to - from;
+  const numOfMins = Math.round(numOfSecs / 60)
+  const numOfHours = Math.round(numOfMins / 60);
+  const numOfDays = Math.round(numOfHours / 24);
+
+  return numOfDays;
+}
+
 const getCustomDateRange = (req, res) => {
   const from = req.params.from;
   const to = req.params.to;
 
+  const datesFromToday = calculateDateRange(from, moment(new Date()).unix()) - 1;
+  const totalDates = calculateDateRange(from, to);
+  console.log(datesFromToday, 'days from today');
+  console.log(totalDates, 'total date range');
+
   console.log(from, 'from', to, 'to');
 
-  axios.get(baseURL + 'histoday?fsym=ETH&tsym=USD&limit=365')
+  axios.get(baseURL + `histoday?fsym=ETH&tsym=USD&limit=${datesFromToday}`)
   .then((response) => {
     const prices = response.data.Data;
+    prices.splice(totalDates + 1);
     const labels = prices.map((element) => {
       const time = element.time;
-      return moment.unix(time).format('MMM YY');
+      return moment.unix(time).format('MMM D');
     });
     
     const data = createPriceList(prices);

@@ -61,7 +61,6 @@ class App extends Component {
   displayLastMonth() {
     axios.get('/month')
     .then((res) => {
-      console.log(res.data, 'client side');
       this.setState({
         data: {
           labels: res.data.labels,

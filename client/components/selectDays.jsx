@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 import moment from 'moment';
 import Helmet from 'react-helmet';
 
@@ -20,16 +21,38 @@ class SelectDays extends Component {
       to: undefined,
     };
   }
+
+  getCustomDateRange(from, to) {
+    axios.get(`http://localhost:5001/custom/${from}/${to}`)
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((err) => {
+        if (err) throw err;
+      })
+  }
+
+  checkBothDatesChanged() {
+    if (this.state.from !== undefined && this.state.to !== undefined) {
+      return true;
+    }
+  }
+
   componentWillUnmount() {
     clearTimeout(this.timeout);
   }
+
   focusTo() {
     // Focus to `to` field. A timeout is required here because the overlays
     // already set timeouts to work well with input fields
     this.timeout = setTimeout(() => this.to.getInput().focus(), 0);
   }
+
   showFromMonth() {
-    const { from, to } = this.state;
+    const { 
+      from, 
+      to,
+    } = this.state;
     if (!from) {
       return;
     }
@@ -37,16 +60,33 @@ class SelectDays extends Component {
       this.to.getDayPicker().showMonth(from);
     }
   }
+
   handleFromChange(from) {
     // Change the from date and focus the "to" input field
-    this.setState({ from });
+    this.setState({ 
+      from,
+    });
+    this.getCustomDateRange(from, this.state.to);
   }
+
   handleToChange(to) {
-    this.setState({ to }, this.showFromMonth);
+    this.setState({ 
+      to
+    }, this.showFromMonth);
+    this.getCustomDateRange(this.state.from, to);
   }
+
   render() {
-    const { from, to } = this.state;
-    const modifiers = { start: from, end: to };
+    const { 
+      from,
+      to,
+    } = this.state;
+
+    const modifiers = { 
+      start: from, 
+      end: to,
+    };
+
     return (
       <div className="InputFromTo">
         <DayPickerInput

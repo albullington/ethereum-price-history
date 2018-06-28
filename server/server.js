@@ -2,7 +2,12 @@ const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
 
-const { getPriceLastDay, getPriceLastMonth, getPriceLastYear } = require('./helpers');
+const { 
+  getPriceLastDay, 
+  getPriceLastMonth, 
+  getPriceLastYear, 
+  getCustomDateRange,
+ } = require('./helpers');
 
 const app = express();
 
@@ -21,6 +26,10 @@ app.get('/month', (req, res) => {
 
 app.get('/year', (req, res) => {
   getPriceLastYear(req, res);
+})
+
+app.get('/custom/:from/:to', (req, res) => {
+  getCustomDateRange(req, res);
 })
 
 const port = 5001;

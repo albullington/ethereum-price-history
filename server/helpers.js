@@ -77,8 +77,39 @@ const getPriceLastYear = (req, res) => {
   }); 
 }
 
+const getCustomDateRange = (req, res) => {
+  const params = {
+    from,
+    to,
+  } = req;
+
+  console.log(from, 'from', to, 'to');
+
+  axios.get(baseURL + 'histoday?fsym=ETH&tsym=USD&limit=365')
+  .then((response) => {
+    const prices = response.data.Data;
+    const labels = prices.map((element) => {
+      const time = element.time;
+      return moment.unix(time).format('MMM YY');
+    });
+    
+    const data = createPriceList(prices);
+
+    res.send({
+      labels: labels, 
+      data: data
+    });
+  })
+  .catch((err) => {
+    if (err) {
+      res.sendStatus(500);
+    }
+  }); 
+}
+
 module.exports = {
   getPriceLastDay, 
   getPriceLastMonth,
   getPriceLastYear,
+  getCustomDateRange,
 }

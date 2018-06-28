@@ -4,8 +4,11 @@ import { Line } from 'react-chartjs-2';
 class Chart extends Component {
   render() {
     const {
-      data
+      data, 
+      coin,
     } = this.props;
+
+    const title = coin === 'ETH' ? 'Ethereum' : 'Bitcoin';
     
     return (
       <div id="price-chart">
@@ -15,7 +18,7 @@ class Chart extends Component {
             {
               title: {
                 display: true,
-                text: 'Ethereum (USD) Price',
+                text: `${title} (USD) Price`,
                 fontSize: 22,
               },
               legend: {

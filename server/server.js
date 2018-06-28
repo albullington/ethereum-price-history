@@ -16,7 +16,7 @@ app.use(bodyParser.json());
 
 app.get('/', (req, res) => res.send('Hello, client'));
 
-app.get('/day', (req, res) => {
+app.get('/day/:coin', (req, res) => {
   getPriceLastDay(req, res);
 })
 

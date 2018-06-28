@@ -9,7 +9,9 @@ const createPriceList = (prices) => prices.map((element) => {
 });
 
 const getPriceLastDay = (req, res) => {
-  axios.get(baseURL + 'histominute?fsym=ETH&tsym=USD&limit=1440')
+  const coin = req.params.coin;
+
+  axios.get(baseURL + `histominute?fsym=${coin}&tsym=USD&limit=1440`)
   .then((response) => {
     const prices = response.data.Data;
     const labels = prices.map((element) => {
@@ -92,10 +94,6 @@ const getCustomDateRange = (req, res) => {
 
   const datesFromToday = calculateDateRange(from, moment(new Date()).unix()) - 1;
   const totalDates = calculateDateRange(from, to);
-  console.log(datesFromToday, 'days from today');
-  console.log(totalDates, 'total date range');
-
-  console.log(from, 'from', to, 'to');
 
   axios.get(baseURL + `histoday?fsym=ETH&tsym=USD&limit=${datesFromToday}`)
   .then((response) => {

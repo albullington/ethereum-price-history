@@ -78,12 +78,12 @@ const getPriceLastYear = (req, res) => {
 }
 
 const getCustomDateRange = (req, res) => {
-  const params = {
+  const {
     from,
     to,
   } = req;
 
-  console.log(from, 'from', to, 'to');
+  console.log(from, 'from', to, 'to', req);
 
   axios.get(baseURL + 'histoday?fsym=ETH&tsym=USD&limit=365')
   .then((response) => {

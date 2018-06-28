@@ -22,19 +22,24 @@ class SelectDays extends Component {
     };
   }
 
-  getCustomDateRange(from, to) {
-    axios.get(`http://localhost:5001/custom/${from}/${to}`)
-      .then((res) => {
-        console.log(res.data);
-      })
-      .catch((err) => {
-        if (err) throw err;
-      })
+  checkBothDatesChanged(from, to) {
+    if (from !== undefined && to !== undefined) {
+      return true;
+    }
   }
 
-  checkBothDatesChanged() {
-    if (this.state.from !== undefined && this.state.to !== undefined) {
-      return true;
+  getCustomDateRange(from, to) {
+    if (this.checkBothDatesChanged(from, to)) {
+      const unixFrom = moment(from).unix();
+      const unixTo = moment(to).unix();
+
+      axios.get(`http://localhost:5001/custom/${unixFrom}/${unixTo}`)
+        .then((res) => {
+          console.log(res.data);
+        })
+        .catch((err) => {
+          if (err) throw err;
+        })
     }
   }
 

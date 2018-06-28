@@ -28,15 +28,6 @@ class App extends Component {
     this.displayCustomDateRange = this.displayCustomDateRange.bind(this);
   }
 
-  componentDidUpdate(prevState) {
-    const {
-      coin
-    } = this.state;
-    if (coin !== prevState.coin) {
-      this.displayLastDay();
-    }
-  }
-
   handleDayClick(e) {
     e.preventDefault();
     this.displayLastDay();
@@ -95,7 +86,11 @@ class App extends Component {
   }
 
   displayLastMonth() {
-    axios.get('/month/')
+    const {
+      coin,
+    } = this.state;
+
+    axios.get(`/month/${coin}`)
     .then((res) => {
       this.setState({
         data: {
@@ -114,7 +109,11 @@ class App extends Component {
   }
 
   displayLastYear() {
-    axios.get('/year')
+    const {
+      coin,
+    } = this.state;
+
+    axios.get(`/year/${coin}`)
     .then((res) => {
       this.setState({
         data: {
@@ -133,7 +132,11 @@ class App extends Component {
   }
 
   displayCustomDateRange(from, to) {
-    axios.get(`http://localhost:5001/custom/${from}/${to}`)
+    const {
+      coin,
+    } = this.state;
+
+    axios.get(`http://localhost:5001/custom/${from}/${to}/${coin}`)
       .then((res) => {
         console.log(res.data, 'data in client');
         this.setState({

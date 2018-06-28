@@ -20,15 +20,15 @@ app.get('/day/:coin', (req, res) => {
   getPriceLastDay(req, res);
 })
 
-app.get('/month', (req, res) => {
+app.get('/month/:coin', (req, res) => {
   getPriceLastMonth(req, res);
 })
 
-app.get('/year', (req, res) => {
+app.get('/year/:coin', (req, res) => {
   getPriceLastYear(req, res);
 })
 
-app.get('/custom/:from/:to', (req, res) => {
+app.get('/custom/:from/:to/:coin', (req, res) => {
   getCustomDateRange(req, res);
 })
 

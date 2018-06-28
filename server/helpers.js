@@ -34,7 +34,9 @@ const getPriceLastDay = (req, res) => {
 }
 
 const getPriceLastMonth = (req, res) => {
-  axios.get(baseURL + 'histoday?fsym=ETH&tsym=USD&limit=30')
+  const coin = req.params.coin;
+
+  axios.get(baseURL + `histoday?fsym=${coin}&tsym=USD&limit=30`)
   .then((response) => {
     const prices = response.data.Data;
     const labels = prices.map((element) => {
@@ -57,7 +59,9 @@ const getPriceLastMonth = (req, res) => {
 }
 
 const getPriceLastYear = (req, res) => {
-  axios.get(baseURL + 'histoday?fsym=ETH&tsym=USD&limit=365')
+  const coin = req.params.coin;
+
+  axios.get(baseURL + `histoday?fsym=${coin}&tsym=USD&limit=365`)
   .then((response) => {
     const prices = response.data.Data;
     const labels = prices.map((element) => {
@@ -91,11 +95,12 @@ const calculateDateRange = (from, to) => {
 const getCustomDateRange = (req, res) => {
   const from = req.params.from;
   const to = req.params.to;
+  const coin = req.params.coin;
 
   const datesFromToday = calculateDateRange(from, moment(new Date()).unix()) - 1;
   const totalDates = calculateDateRange(from, to);
 
-  axios.get(baseURL + `histoday?fsym=ETH&tsym=USD&limit=${datesFromToday}`)
+  axios.get(baseURL + `histoday?fsym=${coin}&tsym=USD&limit=${datesFromToday}`)
   .then((response) => {
     const prices = response.data.Data;
     prices.splice(totalDates + 1);

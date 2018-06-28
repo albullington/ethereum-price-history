@@ -77,6 +77,8 @@ const getPriceLastYear = (req, res) => {
   }); 
 }
 
-module.exports.getPriceLastDay = getPriceLastDay;
-module.exports.getPriceLastMonth = getPriceLastMonth;
-module.exports.getPriceLastYear = getPriceLastYear;
+module.exports = {
+  getPriceLastDay, 
+  getPriceLastMonth,
+  getPriceLastYear,
+}

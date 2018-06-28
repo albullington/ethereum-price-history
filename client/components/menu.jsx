@@ -11,6 +11,7 @@ const buttonStyle = {
 
 const inputStyle = {
   float: 'right',
+  marginRight: '240px',
 }
 
 const Menu = ({ onDayClick, onMonthClick, onYearClick }) => (

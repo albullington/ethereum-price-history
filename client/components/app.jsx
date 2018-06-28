@@ -22,6 +22,7 @@ class App extends Component {
     this.handleDayClick = this.handleDayClick.bind(this);
     this.handleMonthClick = this.handleMonthClick.bind(this);
     this.handleYearClick = this.handleYearClick.bind(this);
+    this.displayCustomDateRange = this.displayCustomDateRange.bind(this);
   }
 
   handleDayClick(e) {

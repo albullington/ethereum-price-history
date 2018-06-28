@@ -117,7 +117,10 @@ class SelectDays extends Component {
             parseDate={parseDate}
             dayPickerProps={{
               selectedDays: [from, { from, to }],
-              disabledDays: { after: today },
+              disabledDays: { 
+                before: from,
+                after: today,
+              },
               modifiers,
               month: from,
               fromMonth: from,

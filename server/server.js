@@ -32,6 +32,6 @@ app.get('/custom/:from/:to/:coin', (req, res) => {
   getCustomDateRange(req, res);
 })
 
-const port = 5001;
+const PORT = process.env.PORT || 5001;
 
-app.listen(port, () => console.log(`Listening on http://localhost:${port}`));
+app.listen(PORT, () => console.log(`Listening on http://localhost:${PORT}`));

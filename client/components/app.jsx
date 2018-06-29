@@ -60,6 +60,7 @@ class App extends Component {
         color: 'rgba(75,192,192,1)',
       });
     }
+    this.displayLastDay();
   }
 
   displayLastDay() {
@@ -138,7 +139,6 @@ class App extends Component {
 
     axios.get(`http://localhost:5001/custom/${from}/${to}/${coin}`)
       .then((res) => {
-        console.log(res.data, 'data in client');
         this.setState({
           data: {
             labels: res.data.labels,
@@ -156,7 +156,17 @@ class App extends Component {
   }
 
   componentDidMount() {
-    this.displayLastDay()
+    this.displayLastDay();
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    const {
+      coin
+    } = this.state;
+
+    if (coin !== prevState.coin) {
+      this.displayLastDay();
+    }
   }
 
   render() {

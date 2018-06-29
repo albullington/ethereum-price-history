@@ -68,7 +68,7 @@ class App extends Component {
       coin,
     } = this.state;
 
-    axios.get(`https://radiant-beach-23650.herokuapp.com/day/${coin}`)
+    axios.get(`https://radiant-beach-23650.herokuapp.com:5001/day/${coin}`)
     .then((res) => {
       this.setState({
         data: {
@@ -91,7 +91,7 @@ class App extends Component {
       coin,
     } = this.state;
 
-    axios.get(`https://radiant-beach-23650.herokuapp.com/month/${coin}`)
+    axios.get(`https://radiant-beach-23650.herokuapp.com:5001/month/${coin}`)
     .then((res) => {
       this.setState({
         data: {
@@ -114,7 +114,7 @@ class App extends Component {
       coin,
     } = this.state;
 
-    axios.get(`https://radiant-beach-23650.herokuapp.com/year/${coin}`)
+    axios.get(`https://radiant-beach-23650.herokuapp.com:5001/year/${coin}`)
     .then((res) => {
       this.setState({
         data: {
@@ -137,7 +137,7 @@ class App extends Component {
       coin,
     } = this.state;
 
-    axios.get(`https://radiant-beach-23650.herokuapp.com/custom/${from}/${to}/${coin}`)
+    axios.get(`https://radiant-beach-23650.herokuapp.com:5001/custom/${from}/${to}/${coin}`)
       .then((res) => {
         this.setState({
           data: {

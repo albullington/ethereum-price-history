@@ -137,7 +137,7 @@ class App extends Component {
       coin,
     } = this.state;
 
-    axios.get(`http://localhost:5001/custom/${from}/${to}/${coin}`)
+    axios.get(`/custom/${from}/${to}/${coin}`)
       .then((res) => {
         this.setState({
           data: {

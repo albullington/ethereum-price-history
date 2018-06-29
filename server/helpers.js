@@ -97,7 +97,7 @@ const getCustomDateRange = (req, res) => {
   const to = req.params.to;
   const coin = req.params.coin;
 
-  const datesFromToday = calculateDateRange(from, moment(new Date()).unix()) - 1;
+  const datesFromToday = calculateDateRange(from, moment(new Date()).unix());
   const totalDates = calculateDateRange(from, to);
 
   axios.get(baseURL + `histoday?fsym=${coin}&tsym=USD&limit=${datesFromToday}`)

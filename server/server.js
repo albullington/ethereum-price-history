@@ -35,3 +35,7 @@ app.get('/custom/:from/:to/:coin', (req, res) => {
 const PORT = process.env.PORT || 5001;
 
 app.listen(PORT, () => console.log(`Listening on http://localhost:${PORT}`));
+
+setInterval(() => {
+  http.get('https://radiant-beach-23650.herokuapp.com/');
+}, 600000); //ping server every 10 mins to keep app live
